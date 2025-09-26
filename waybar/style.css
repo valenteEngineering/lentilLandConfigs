@@ -1,5 +1,5 @@
 * {
     /* This tells Waybar to try BlexMono first, then fall back to a generic font if needed */
-    font-family: "BlexMono Nerd Font", sans-serif;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
     font-size: 16px;
 }
