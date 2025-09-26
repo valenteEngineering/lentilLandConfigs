@@ -1,0 +1,113 @@
+user AlexValnte
+
+### update system
+sudo apt update
+sudo apt upgrade
+
+### install vim
+sudo apt install vim-gtk3
+
+### install vial (for keyboard) #TODO:
+
+###install chrome from deb package
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install google-chrome-stable_current_amd64.deb
+
+### need most uptodat repos because default gcc is too old for hyprland build process
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt update
+sudo apt modernize-sources
+
+### set gcc 15 to defalut compiler
+sudo apt install gcc-15 g++-15
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-15 100
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-15 100
+
+### install hyperland from source
+### depencencies
+sudo apt install -y meson wget build-essential ninja-build cmake-extras cmake gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev libdrm-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libegl-dev libgles2 libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev libtomlplusplus3 libre2-dev git xdg-desktop-portal-hyprland libzip-dev libcairo2-dev librsvg2-dev libtomlplusplus-dev libpugixml-dev libmagic-dev libwayland-dev libgbm-dev libdisplay-info-dev libxcursor-dev libgtk-4-dev libgtk-3-dev libxcb-errors-dev bison hyprpaper rofi jq dolphin
+
+### modern xkb
+git clone https://github.com/xkbcommon/libxkbcommon.git
+cd libxkbcommon
+meson setup build -Denable-x11=false
+ninja -C build 
+sudo ninja -C build install
+
+### modern libinput (apt out of date)
+git clone https://gitlab.freedesktop.org/libinput/libinput.git
+cd libinput
+meson setup build
+ninja -C build
+sudo ninja -C build install
+
+### modern wayland versions (apt out of date)
+git clone https://gitlab.freedesktop.org/wayland/wayland-protocols.git
+cd wayland-protocols:
+meson setup build
+ninja -C build
+sudo ninja -C build install
+
+
+### hyprutils
+git clone https://github.com/hyprwm/hyprutils.git
+cd hyprutils
+cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -B build
+cmake --build build --config Release --target all -j`nproc`
+sudo cmake --install build
+cd ..
+
+### hyprlang
+git clone https://github.com/hyprwm/hyprlang.git
+cd hyprlang
+cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -B build
+cmake --build build --config Release --target all -j`nproc`
+sudo cmake --install build
+cd ..
+
+### hyprcursor
+git clone https://github.com/hyprwm/hyprcursor.git
+cd hyprcursor
+cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -B build
+cmake --build build --config Release --target all -j`nproc`
+sudo cmake --install build
+cd ..
+
+### hypergraphics
+git clone https://github.com/hyprwm/hyprgraphics.git
+cd hyprgraphics
+cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -B build
+cmake --build build --config Release --target all -j`nproc`
+sudo cmake --install build
+cd ..
+
+### hyperwayland-scanner
+cd ~/hypr-dependencies
+git clone https://github.com/hyprwm/hyprwayland-scanner.git
+cd hyprwayland-scanner
+cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -B build
+cmake --build build --config Release --target all -j`nproc`
+sudo cmake --install build
+
+### aquamarine
+git clone https://github.com/hyprwm/aquamarine.git
+cd aquamarine
+cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -B build
+cmake --build build --config Release --target all -j`nproc`
+sudo cmake --install build
+cd ..
+
+
+### NOW HYPERLAND ITSELF
+git clone --recursive https://github.com/hyprwm/Hyprland
+cd Hyprland
+git submodule update --init --recursive # JUST TO MAKE SURE SUBMODULES ARE FETCHED
+make all && sudo make install
+
+### HERE GET CONFIG FILES FROM MY GIT #TODO
+#
+
+
+### setup black wallpaper - this just creates the black image, rest is in config hyperpaper
+convert -size 1x1 xc:"#000000" ~/.config/hypr/black.png
+

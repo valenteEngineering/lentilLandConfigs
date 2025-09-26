@@ -1,0 +1,52 @@
+{
+    //- The bar's position and other settings
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "spacing": 4,
+
+    //- The modules that will be displayed
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/mode" // This will be used for your resize mode indicator!
+    ],
+    "modules-center": ["hyprland/window"],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "cpu",
+        "memory",
+        "clock"
+    ],
+
+    //- Configuration for each module
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate"
+    },
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 50
+    },
+    "pulseaudio": {
+        "format": "{volume}% ", // You'll need a Nerd Font for the icon
+        "format-muted": "Muted ",
+        "on-click": "pavucontrol"
+    },
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-disconnected": "Disconnected "
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": true
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "clock": {
+        "format": "{:%I:%M %p}", // 12-hour format
+        "tooltip-format": "<big>{:%Y-%m-%d}</big>\n<tt><small>{calendar}</small></tt>"
+    }
+}
