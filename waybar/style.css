@@ -1,5 +1,47 @@
-* {
-    /* This tells Waybar to try BlexMono first, then fall back to a generic font if needed */
+/* ==================================================================
+ * A clean and corrected style for a minimal Waybar
+ * ================================================================== */
+
+/* This is the main bar container */
+window#waybar {
+    background-color: #2c2c2c;
+    color: #ffffff;
     font-family: "JetBrainsMono Nerd Font", sans-serif;
-    font-size: 16px;
+    font-size: 13px; /* A slightly more readable default size */
+}
+
+/* This targets every module */
+#workspaces,
+#mode,
+#window,
+#clock,
+#cpu,
+#memory,
+#pulseaudio,
+#network {
+    /* This is the key to fixing the height issue */
+    padding: 0;
+    margin: 0;
+    min-height: 0;
+
+    /* Add some horizontal padding to space things out nicely */
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* Add some specific styling for the workspaces */
+#workspaces {
+    background-color: #2a2a2a;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    color: #7a7a7a;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    background-color: #4a4a4a;
 }

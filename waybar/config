@@ -1,9 +1,9 @@
 {
     //- The bar's position and other settings
     "layer": "top",
-    "position": "top",
-    "height": 40,
-    "spacing": 4,
+    "position": "bottom",
+    //"height": 1,
+    "spacing": 40,
 
     //- The modules that will be displayed
     "modules-left": [
