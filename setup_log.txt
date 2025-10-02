@@ -1,0 +1,2 @@
+SUCCESS: Config Clone
+SUCCESS: Waybar Symlink
