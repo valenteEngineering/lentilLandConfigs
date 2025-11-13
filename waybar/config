@@ -16,7 +16,7 @@
         "custom/network_status",
         "cpu",
         "memory",
-        "clock"
+        "clock",
     ],
 
     //- Configuration for each module
@@ -56,5 +56,5 @@
     "clock": {
         "format": "{:%I:%M %p}", // 12-hour format
         "tooltip-format": "<big>{:%Y-%m-%d}</big>\n<tt><small>{calendar}</small></tt>"
-    }
+    },
 }
